@@ -1,17 +1,25 @@
 import Header from "./header";
 import Menu from "./menu";
 import styled from "styled-components";
-import { useState } from "react";
+import NovoHabito from "./NovoHabito";
+import React,{ useState } from "react";
+
+
 
 export default function Habitos(){
+    const [isOpen, setIsOpen] = useState(false)
     return(
         <>
             <Header />
             <Conteudo>
-                <AddHabito>
-                    <p>Meus hábitos</p>
-                    <div>+</div>
-                </AddHabito>
+                <Container>
+                    <AddHabito>
+                        <p>Meus hábitos</p>
+                        <div onClick={()=> setIsOpen(true)}>+</div>
+                    </AddHabito>
+                    <NovoHabito open={isOpen}/>
+                    <TextoSemHab>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</TextoSemHab>
+                </Container>
             </Conteudo>
             <Menu />
         </>
@@ -21,24 +29,34 @@ export default function Habitos(){
 
 
 const Conteudo = styled.div`
-    margin-top: 100px;
+    
+    height: 500px;
     font-family: 'Lexend Deca', sans-serif;
-    color: #126BA5;
+        color: #126BA5;
+        display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    
 
+`
+const Container = styled.div`
+    margin-top: 100px;
+    max-width: 90%;
 `
 
 const AddHabito = styled.div`
-    width: 100%;
+    
     height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 p{
-    margin: 0 15px;
+    
     font-size: 23px;
 }
 div{
-    margin: 0 15px;
+    
     font-size: 30px;
     background-color: #52B6FF;
     width: 37px;
@@ -50,6 +68,10 @@ div{
     align-items: center;
     padding-bottom: 5px;
 }
+`
+const TextoSemHab = styled.p`
 
+    margin-top: 30px;
+    color: #666666;
 
 `
